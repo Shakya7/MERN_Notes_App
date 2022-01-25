@@ -1,5 +1,5 @@
 # MERN_Notes_App
-SPA Website (without R-Router) with Login, Authentication, CRUD o/p on notes
+SPA Website (without R-Router) with Login, Signup, Authentication, CRUD o/p on notes
 
 Features of this App:
 
