@@ -1,19 +1,20 @@
 import NoteCreate from "./NoteCreate";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function Profile(props){
     console.log(props.dataP);
+    const [notes,setNotes]=useState([]);
+    useEffect(()=>{
+        console.log("Notes Uploaded to Client-Side");
+        console.log(notes);
+    },[notes]);
 
-
-    const f1=()=>{
-        return(
-            <NoteCreate/>
-        )
-    }
     return(
         <div className="profile-body">
             <div>
                 <section className="side-section">
-                    
+                
                 </section>
             </div>
             <div className="show">
@@ -21,10 +22,18 @@ function Profile(props){
                     <p className="wlcm-txt">Welcome, {props.dataP}</p>
                 </div>
                 <div className="note-create">
-                    <div >
-                        <button onClick={(e)=>{
-                        f1()
-                    }}>+</button>
+                    <div onClick={async(e)=>{
+                            try{
+                                const result=await axios.get("/get-notes");
+                                //console.log(result.data.data.allNotes);
+                                setNotes(result.data.data.allNotes);
+                            }catch(err){
+                                console.log(err);
+                                //props.alertRoute();
+                                props.showResultScreen("error");
+                            }
+                        }  
+                    }>+
                     </div>
                 </div>
                 <div className="profile-main-section">

@@ -74,7 +74,7 @@ function App() {
           loginActivate?<Login testF={stateLifting} action={abc} showResultScreen={screenRoute} alertRoute={loginRoute}/>:""
         }
         {
-          resultScreen==="show-profile"?<Profile dataP={profileData}/>:(resultScreen==="error"?<Error/>:"")
+          resultScreen==="show-profile"?<Profile dataP={profileData} showResultScreen={screenRoute}/>:(resultScreen==="error"?<Error/>:"")
         }
         {
           signupActivate?<p className="login-above-text">Signup to avail this AWESOME app</p>:<p></p>

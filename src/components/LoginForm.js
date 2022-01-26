@@ -43,11 +43,12 @@ function Login(props){
                         <button className="btn-lg" onClick={async(e)=>{
                             try{
                             e.preventDefault();
-                            const result=await axios.post("http://127.0.0.1:4000/login-form",{
+                            const result=await axios.post("/login-form",{
                                 email:email,
                                 password:password,
                             })
-                            console.log(result.data.data.user.name);
+                            //console.log(result.data.data.user.name);
+                            console.log(result);
                             if(result.data.status==="success"){
                                 setDataProf(result.data.data.user.name);
                                 //await props.testF(dataProf);
