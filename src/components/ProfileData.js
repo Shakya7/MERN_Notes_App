@@ -1,10 +1,10 @@
-import NoteCreate from "./NoteCreate";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 function Profile(props){
     console.log(props.dataP);
     const [notes,setNotes]=useState([]);
+    //const [cNote,setCNote]=useState(false);
     useEffect(()=>{
         console.log("Notes Uploaded to Client-Side");
         console.log(notes);
@@ -38,7 +38,9 @@ function Profile(props){
                 </div>
                 <div className="profile-main-section">
                     <div className="notes-sec">
-                        <div className="prof-sub">
+                        <div className="prof-sub" onClick={(e)=>{
+                            props.showAllNotes();
+                        }}>
                             View all Notes
                         </div>
                         <div className="prof-sub">
