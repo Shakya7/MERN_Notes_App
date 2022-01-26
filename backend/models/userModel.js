@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
 const validator=require("validator");
+const jwt=require("jsonwebtoken");
 
 const userSchema=new mongoose.Schema({
     name:{
@@ -8,7 +9,8 @@ const userSchema=new mongoose.Schema({
     },
     email:{
         type:String,
-        validate:[validator.isEmail,"Provide a valid email address"]
+        validate:[validator.isEmail,"Provide a valid email address"],
+        unique:true
     },
     password:{
         type:String,
@@ -29,8 +31,17 @@ const userSchema=new mongoose.Schema({
     },
     role:{
         type:String,
-        enum:["admin","user"]
+        enum:["admin","user"],
+        default:"user"
     }
+});
+userSchema.set('toObject', { virtuals: true })
+userSchema.set('toJSON', { virtuals: true })
+
+userSchema.virtual("notes",{
+    ref:"Note",
+    foreignField:"user",
+    localField:"_id"
 });
 
 const User=mongoose.model("User", userSchema);

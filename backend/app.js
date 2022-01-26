@@ -2,12 +2,14 @@ const express=require("express");
 const app=express();
 const userRouter=require("./routes/userRoutes");
 const viewRouter=require("./routes/viewRoutes");
-const cors=require("cors");
+const noteRouter=require("./routes/noteRoutes");
+const cookieParser=require("cookie-parser");
 
 
 //Middleware
 app.use(express.json({limit:"10kb"}));
 app.use(express.urlencoded({extended:true, limit:"10kb"}));
+app.use(cookieParser());
 
 //app.options("*",cors({origin:"http://127.0.0.1:3000",optionsSuccessStatus:200}));
 //app.use(cors({origin:"http://127.0.0.1:3000",optionsSuccessStatus:200}));
@@ -22,5 +24,6 @@ app.use((req, res, next)=>{
 });  
 app.use("/",viewRouter);
 app.use("/api/v1/users",userRouter);
+app.use("/api/v1/notes",noteRouter);
 
 module.exports=app;
