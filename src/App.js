@@ -6,6 +6,7 @@ import Profile from "./components/ProfileData";
 import Error from "./components/ErrorData";
 import Footer from "./components/Footer";
 import Signup from "./components/SignUpForm";
+import AllNotes from "./components/user-notes-section/AllNotes";
 
 function App() {
   const [loginActivate, setloginActivate]=useState(false);
@@ -13,6 +14,8 @@ function App() {
   const [resultScreen,setResultScreen]=useState("");
   const [profileData,setProfileData]=useState("");
   const [isLoggedIn, setIsLoggedIn]=useState(false);
+  const [allNotesActive, setAllNotesActive]=useState(false);
+  
   let profileInfo=profileData;
 
   useEffect(()=>{
@@ -21,11 +24,21 @@ function App() {
     if(!signupActivate){
       if(isLoggedIn)
       {
-        setResultScreen("show-profile");
-        setProfileData(profileInfo);
+        if(allNotesActive){
+          setResultScreen("all-notes");
+        }
+        else{
+          setResultScreen("show-profile");
+          setProfileData(profileInfo);
+        }
       }
     }
-  },[signupActivate]);
+  },[signupActivate,allNotesActive]);
+
+  const seeAllNotes=()=>{
+    setAllNotesActive(true);
+  }
+
 
   const loginRoute=()=>{
     setloginActivate((prev)=>!prev);
@@ -55,17 +68,11 @@ function App() {
   const showLoginBttn=()=>{
     setIsLoggedIn(false);
   }
-  const showHomePage=()=>{
-    
-  }
   return (
     <div className="container">
       <Header aaa={screenRoute} showLogin={isLoggedIn} cool={showLoginBttn} homeScreen={screenRoute} alertRoute={loginRoute} alertSignUpR={signupRoute} closeLogin={closeloginPage} closeSignup={closesignupPage}/>
       
       <div className="body">
-        {
-          showHomePage()
-        }
 
         {
           loginActivate?<p className="login-above-text">Please login</p>:<p></p>
@@ -74,13 +81,16 @@ function App() {
           loginActivate?<Login testF={stateLifting} action={abc} showResultScreen={screenRoute} alertRoute={loginRoute}/>:""
         }
         {
-          resultScreen==="show-profile"?<Profile dataP={profileData} showResultScreen={screenRoute}/>:(resultScreen==="error"?<Error/>:"")
+          resultScreen==="show-profile"?<Profile dataP={profileData} showResultScreen={screenRoute} showAllNotes={seeAllNotes}/>:resultScreen==="all-notes"?<AllNotes/>:resultScreen==="error"?<Error/>:""
         }
         {
           signupActivate?<p className="login-above-text">Signup to avail this AWESOME app</p>:<p></p>
         }
         {
           signupActivate?<Signup actualData={profileData} testF={stateLifting} action={abc} showResultScreen={screenRoute} closeSingup={closesignupPage}/>:""
+        }
+        {
+
         }
       </div>
       <Footer />
