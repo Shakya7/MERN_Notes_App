@@ -205,3 +205,9 @@
   justify-content: center;
   align-items: center;
 }
+.all-notes-sec{
+  width:inherit;
+  height: inherit;
+  background-color: rgb(210, 189, 236);
+  border-radius: 15px 15px 15px 15px;
+}
