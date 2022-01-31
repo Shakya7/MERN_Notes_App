@@ -3,11 +3,13 @@ const mongoose=require("mongoose");
 
 const noteSchema=new mongoose.Schema({
     note:{
-        type:String
+        type:String,
+        required:[true,"Must create a note"]
     },
     user:{
         type:mongoose.Schema.ObjectId,
-        ref:"User"
+        ref:"User",
+        required:[true,"Must have a valid user ID"]
     }
 });
 
