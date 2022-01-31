@@ -45,8 +45,28 @@ exports.getAllUsers=async (req,res)=>{
     }
 }
 
+exports.updateUser=async (req,res)=>{
+    try{
+        const user=await User.findByIdAndUpdate(req.params.id,req.body,{
+            new:true
+        });
+        res.status(200).json({
+            status:"success",
+            data:{
+                user
+            }
+        })
+
+    }catch(err){
+        res.status(404).json({
+            message:"Error"
+        })
+    }
+}
+
 exports.login=async (req,res)=>{
     try{
+        console.log(req.query);
         const {email, password}=req.body;
         if(!email || !password)
             throw "Please provide email AND password";
