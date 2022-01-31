@@ -14,7 +14,7 @@ function AllNotes(props){
             {
                 notesPresent?
                 <div>
-                    <div style={{marginTop:"10px", width:"80vw",height:"65vh",backgroundColor:"violet",borderRadius:"15px 15px 15px 15px", display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gridGap:"20px",overflowY:"auto",scrollbarWidth:"none", padding:"20px"}}> 
+                    <div style={{marginTop:"10px", width:"80vw",height:"65vh",backgroundColor:"violet",borderRadius:"15px 15px 15px 15px", display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gridGap:"20px",overflowY:"auto",scrollbarWidth:"none", padding:"20px",boxShadow: "rgb(106, 84, 116) 5px 5px 8px"}}> 
                         {
                             props.notes.map((val,id)=>(
                                 <NoteCard action="AAAAA" key={id} dataNotes={val.note}/>
