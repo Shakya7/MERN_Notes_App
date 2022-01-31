@@ -47,6 +47,10 @@ function App() {
     }
   },[signupActivate,allNotesActive,allNotesData,createNoteActive,resultScreen,createNoteActivePr]);
 
+  const getBackToProfile=()=>{
+    setAllNotesActive(false);
+    setCreateNoteActivePr(false);
+  }
   const createNoteClick=()=>{
     setCreateNoteActive(true);
     setCreateNoteActivePr(false);
@@ -112,7 +116,7 @@ function App() {
           loginActivate?<Login testF={stateLifting} action={abc} showResultScreen={screenRoute} alertRoute={loginRoute}/>:""
         }
         {
-          resultScreen==="show-profile"?<Profile createNoteProf={createNoteClickProfile} sendNotes={getNotes} dataP={profileData} showResultScreen={screenRoute} showAllNotes={seeAllNotes}/>:resultScreen==="all-notes"?<AllNotes notes={allNotesData} createNote={createNoteClick}/>:resultScreen==="create-note"?<CreateNote />:resultScreen==="error"?<Error/>:""
+          resultScreen==="show-profile"?<Profile closeNoteCreation={closeNoteClick} createNoteProf={createNoteClickProfile} sendNotes={getNotes} dataP={profileData} showResultScreen={screenRoute} showAllNotes={seeAllNotes}/>:resultScreen==="all-notes"?<AllNotes notes={allNotesData} createNote={createNoteClick}/>:resultScreen==="create-note"?<CreateNote returnBackToProfile={getBackToProfile}/>:resultScreen==="error"?<Error/>:""
         }
         {
           signupActivate?<p className="login-above-text">Signup to avail this AWESOME app</p>:<p></p>
