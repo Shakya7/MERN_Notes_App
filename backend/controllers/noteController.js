@@ -17,6 +17,33 @@ exports.createNote=async (req,res)=>{
         })
     }
 }
+
+exports.createNoteFromUser=async(req,res)=>{
+    try{
+        const user=res.user;
+        //console.log(req.body);
+        //console.log({...req.body,user:user.id});
+        //console.log("sdfffd", user);
+        if(!user)
+            throw "Invalid access attempt. Please login first"
+        else{
+            console.log("this function is working");
+            const newNote=await Note.create({note:req.body.newNote,user:user.id});
+            res.status(201).json({
+                status:"success",
+                data:{
+                    newNote
+                }
+            })
+        }    
+    }catch(err){
+        res.status(400).json({
+            status:"error jhhh",
+            message:err
+        })
+    }
+}
+
 exports.getAllNotesOfUser=async (req,res)=>{
     try{
         const user=res.user;
