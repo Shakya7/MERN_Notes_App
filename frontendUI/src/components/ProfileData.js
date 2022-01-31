@@ -52,6 +52,7 @@ function Profile(props){
                             const result=await axios.get("/get-notes");
                             //console.log(result.data.data.allNotes);
                             setNotes(result.data.data.allNotes);
+                            props.closeNoteCreation();
                             props.showAllNotes();
                             }catch(err){
                                 console.log(err);
